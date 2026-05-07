@@ -11,7 +11,7 @@ const initializeDB = async () => {
     try {
       await mongoose.connect(mongoURI);
       console.log('Connected to MongoDB Atlas');
-      
+
       // If using MongoDB, we would need Mongoose models. 
       // For a quick switch, we'll keep NeDB for this specific task manager 
       // but warn that data is ephemeral on Railway unless using MongoDB.
@@ -26,7 +26,7 @@ const initializeDB = async () => {
   db.users = Datastore.create({ filename: path.join(dataDir, 'users.db'), autoload: true });
   db.projects = Datastore.create({ filename: path.join(dataDir, 'projects.db'), autoload: true });
   db.tasks = Datastore.create({ filename: path.join(dataDir, 'tasks.db'), autoload: true });
-  
+
   // Ensure unique email
   db.users.ensureIndex({ fieldName: 'email', unique: true });
 };
