@@ -32,7 +32,8 @@ app.get('/api/users', async (req, res) => {
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/dist')));
 
-  app.get('/:path*', (req, res) => {
+  // Catch-all: serve index.html for any request that hasn't been handled
+  app.use((req, res) => {
     res.sendFile(path.join(__dirname, '../client/dist/index.html'));
   });
 }
